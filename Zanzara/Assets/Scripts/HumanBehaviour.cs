@@ -35,7 +35,7 @@ public class HumanBehaviour : MonoBehaviour
             Vector3 randomPoint = GetRandomPointOnTriangle(v0, v1, v2);
 
             // Instantiate the point GameObject at the random point
-            Instantiate(point, randomPoint, Quaternion.identity);
+            Instantiate(point, randomPoint, Quaternion.identity); 
         }
     }
 
