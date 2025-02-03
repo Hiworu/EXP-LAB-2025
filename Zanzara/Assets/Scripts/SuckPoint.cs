@@ -5,7 +5,11 @@ using UnityEngine;
 public class SuckPoint : MonoBehaviour
 {
     MeshCollider mesh;
+    //se la zanzara scende sulla mesh, quinid non sul point, ottiene tot sangue. col passare del tempok la barra del sangue della zanzara aumenta di capienza, quindi
+    //il sangue ottenuto dai non punti non é piú sufficiente per mantenerti in vita
     public GameObject point;
+    public int pointBlood;//script zanzara deve prendere questo
+    public int upperPointBlood = 5;
     public bool isBitten = false;
 
     private void Start()
@@ -22,6 +26,11 @@ public class SuckPoint : MonoBehaviour
             Debug.Log("Bitten");
             Destroy(point);
             StartCoroutine(RespawnPoint());
+        }
+
+        if(gameObject.CompareTag("UpperBody"))
+        {
+            pointBlood += upperPointBlood;
         }
     }
 
