@@ -450,6 +450,8 @@ MonoBehaviour:
   ySpeed: 2
   yMinLimit: -20
   yMaxLimit: 80
+  x: 0
+  y: 0
 --- !u!1 &1242482776
 GameObject:
   m_ObjectHideFlags: 0
@@ -484,7 +486,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -1743,7 +1745,7 @@ GameObject:
   - component: {fileID: 8870978886283537246}
   m_Layer: 0
   m_Name: Body_Head
-  m_TagString: Untagged
+  m_TagString: UpperBody
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1890,7 +1892,7 @@ GameObject:
   - component: {fileID: 2424285060401848851}
   m_Layer: 0
   m_Name: Body_Feet
-  m_TagString: Untagged
+  m_TagString: LowerBody
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1908,6 +1910,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   point: {fileID: 1242482776}
+  pointBlood: 0
+  upperPointBlood: 5
+  isBitten: 0
 --- !u!64 &2424285060401848852
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2008,7 +2013,7 @@ GameObject:
   - component: {fileID: 7842161517634710510}
   m_Layer: 0
   m_Name: Body_Neck
-  m_TagString: Untagged
+  m_TagString: UpperBody
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2139,7 +2144,7 @@ GameObject:
   - component: {fileID: 6634301236888425590}
   m_Layer: 0
   m_Name: Body_Legs
-  m_TagString: Untagged
+  m_TagString: LowerBody
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2190,7 +2195,7 @@ GameObject:
   - component: {fileID: 5158787411454972814}
   m_Layer: 0
   m_Name: Body_Hands
-  m_TagString: Untagged
+  m_TagString: UpperBody
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3069,7 +3074,7 @@ GameObject:
   - component: {fileID: 8851210714100682968}
   m_Layer: 0
   m_Name: Body_Chest
-  m_TagString: Untagged
+  m_TagString: UpperBody
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3170,7 +3175,7 @@ GameObject:
   - component: {fileID: 8598639572592272824}
   m_Layer: 0
   m_Name: Body_Arms
-  m_TagString: Untagged
+  m_TagString: UpperBody
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3401,6 +3406,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   point: {fileID: 1242482776}
+  pointBlood: 0
+  upperPointBlood: 5
+  isBitten: 0
 --- !u!64 &5158787411454972815
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4101,6 +4109,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   point: {fileID: 1242482776}
+  pointBlood: 0
+  upperPointBlood: 5
+  isBitten: 0
 --- !u!64 &6634301236888425591
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4799,6 +4810,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   point: {fileID: 1242482776}
+  pointBlood: 0
+  upperPointBlood: 5
+  isBitten: 0
 --- !u!64 &7842161517634710511
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5090,6 +5104,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   point: {fileID: 1242482776}
+  pointBlood: 0
+  upperPointBlood: 5
+  isBitten: 0
 --- !u!64 &8598639572592272825
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5297,6 +5314,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   point: {fileID: 1242482776}
+  pointBlood: 0
+  upperPointBlood: 5
+  isBitten: 0
 --- !u!64 &8851210714100682969
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5460,6 +5480,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   point: {fileID: 1242482776}
+  pointBlood: 0
+  upperPointBlood: 5
+  isBitten: 0
 --- !u!64 &8870978886283537247
 MeshCollider:
   m_ObjectHideFlags: 0
