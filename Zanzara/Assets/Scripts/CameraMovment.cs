@@ -3,11 +3,12 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour
 {
     public Transform target; // L'oggetto target intorno a cui la camera ruoterà
+    public Transform player; // Il player
     public float distance = 10.0f; // Distanza dal target
     public float autoRotateSpeed = 20.0f; // Velocità di rotazione automatica sull'asse X
     public float ySpeed = 2.0f; // Velocità di spostamento sull'asse Y
-    public float yMinLimit = -20f; // Limite minimo di rotazione sull'asse Y
-    public float yMaxLimit = 80f; // Limite massimo di rotazione sull'asse Y
+    public float yMinLimit = -20f; // Limite minimo di spostamento sull'asse Y
+    public float yMaxLimit = 80f; // Limite massimo di spostamento sull'asse Y
 
     private float x = 0.0f;
     private float y = 0.0f;
@@ -35,11 +36,11 @@ public class CameraMovement : MonoBehaviour
                 y -= ySpeed * Time.deltaTime; // Abbassa la camera
             }
 
-            // Clampa la rotazione sull'asse Y
+            // Clampa la posizione sull'asse Y
             y = Mathf.Clamp(y, yMinLimit, yMaxLimit);
 
-            Quaternion rotation = Quaternion.Euler(y, x, 0);
-            Vector3 position = rotation * new Vector3(0.0f, 0.0f, -distance) + target.position;
+            Quaternion rotation = Quaternion.Euler(0, x, 0); // Mantieni la rotazione sull'asse X
+            Vector3 position = rotation * new Vector3(0.0f, 0.0f, -distance) + new Vector3(target.position.x, y, target.position.z);
 
             transform.rotation = rotation;
             transform.position = position;
@@ -48,15 +49,19 @@ public class CameraMovement : MonoBehaviour
 
     bool PlayerCollidesWithTopScreen()
     {
-        // Implementa la logica per verificare se il player collide con la parte superiore dello schermo
-        // Puoi usare un raycast o altre tecniche per determinare la collisione
-        return false; // Placeholder
+        // Ottieni la posizione del player in coordinate dello schermo
+        Vector3 playerScreenPosition = Camera.main.WorldToViewportPoint(player.position);
+
+        // Verifica se il player è vicino alla parte superiore dello schermo
+        return playerScreenPosition.y >= 0.8f; // % dell'altezza dello schermo
     }
 
     bool PlayerCollidesWithBottomScreen()
     {
-        // Implementa la logica per verificare se il player collide con la parte inferiore dello schermo
-        // Puoi usare un raycast o altre tecniche per determinare la collisione
-        return false; // Placeholder
+        // Ottieni la posizione del player in coordinate dello schermo
+        Vector3 playerScreenPosition = Camera.main.WorldToViewportPoint(player.position);
+
+        // Verifica se il player è vicino alla parte inferiore dello schermo
+        return playerScreenPosition.y <= 0.2f; // % dell'altezza dello schermo
     }
 }

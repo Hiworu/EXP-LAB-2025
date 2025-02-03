@@ -3,6 +3,12 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float speed = 5.0f; // Velocità di movimento del player
+    Rigidbody myBody;
+
+    void Start()
+    {
+        myBody = GetComponent<Rigidbody>();
+    }
 
     void Update()
     {
@@ -23,8 +29,6 @@ public class PlayerMovement : MonoBehaviour
 
         // Calcola il movimento del player
         Vector3 movement = right * moveHorizontal + up * moveVertical;
-
-        // Applica il movimento al player
-        transform.position += movement * speed * Time.deltaTime;
+        myBody.linearVelocity = movement * speed *Time.deltaTime;
     }
 }
