@@ -238,6 +238,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  raycastDistance: 100
+  descendSpeed: 2
+  bloodCollectionTime: 5
 --- !u!135 &553512167
 SphereCollider:
   m_ObjectHideFlags: 0

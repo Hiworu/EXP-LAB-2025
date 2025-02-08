@@ -9,8 +9,11 @@ public class SuckPoint : MonoBehaviour
     //il sangue ottenuto dai non punti non é piú sufficiente per mantenerti in vita
     public GameObject point;
     public int pointBlood;//script zanzara deve prendere questo
-    public int upperPointBlood = 5;
+    public int upperPointBlood = 8;
+    public int lowerPointBlood = 5;
     public bool isBitten = false;
+
+    GameObject currentPoint = null;
 
     private void Start()
     {
@@ -78,7 +81,7 @@ public class SuckPoint : MonoBehaviour
         Vector3 randomPoint = GetRandomPointOnTriangle(v0, v1, v2);
 
         // Instantiate the point GameObject at the random point
-        Instantiate(point, randomPoint, Quaternion.identity); 
+        currentPoint = Instantiate(point, randomPoint, Quaternion.identity); 
         isBitten = false;
     }
 
@@ -87,5 +90,14 @@ public class SuckPoint : MonoBehaviour
         yield return new WaitForSeconds(5);
         PointSpawn();
         Debug.Log("Respawn");
+    }
+
+    public void HasBeenBitten()
+    {
+        
+            Debug.Log("Bitten");
+            isBitten = true;
+            if (currentPoint != null) Destroy(currentPoint);
+            StartCoroutine(RespawnPoint());
     }
 }
