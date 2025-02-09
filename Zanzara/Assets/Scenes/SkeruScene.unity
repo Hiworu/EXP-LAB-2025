@@ -1211,7 +1211,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   point: {fileID: 7064418476306276579, guid: 7a2700219d68d5f428a46900d9291bd2, type: 3}
   pointBlood: 0
-  upperPointBlood: 8
+  upperPointBlood: 10
   lowerPointBlood: 5
   isBitten: 0
 --- !u!64 &437588139
@@ -1602,13 +1602,54 @@ MonoBehaviour:
   speed: 700
   raycastDistance: 100
   descendSpeed: 3
-  bloodCollectionTime: 10
-  onSuckPoint: 0
+  bloodCollectionTime: 50
   mosquitoBlood: 0
   totalMosquitoBlood: 0
   meatMask:
     serializedVersion: 2
     m_Bits: 64
+  bloodCollectionCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2.0350075
+      outSlope: 2.0350075
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.20513178
+      value: 0.41744474
+      inSlope: 0.021074388
+      outSlope: 0.021074388
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.2855135
+    - serializedVersion: 3
+      time: 0.72089106
+      value: 0.5075308
+      inSlope: 0.34195873
+      outSlope: 0.34195873
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.27685544
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1.7644336
+      outSlope: 1.7644336
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!54 &453402609
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1849,7 +1890,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   point: {fileID: 7064418476306276579, guid: 7a2700219d68d5f428a46900d9291bd2, type: 3}
   pointBlood: 0
-  upperPointBlood: 8
+  upperPointBlood: 10
   lowerPointBlood: 5
   isBitten: 0
 --- !u!64 &579495265
@@ -2578,7 +2619,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   point: {fileID: 7064418476306276579, guid: 7a2700219d68d5f428a46900d9291bd2, type: 3}
   pointBlood: 0
-  upperPointBlood: 8
+  upperPointBlood: 10
   lowerPointBlood: 5
   isBitten: 0
 --- !u!64 &885293244
@@ -3671,7 +3712,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   point: {fileID: 7064418476306276579, guid: 7a2700219d68d5f428a46900d9291bd2, type: 3}
   pointBlood: 0
-  upperPointBlood: 8
+  upperPointBlood: 10
   lowerPointBlood: 5
   isBitten: 0
 --- !u!64 &1224315685
@@ -4137,7 +4178,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   point: {fileID: 7064418476306276579, guid: 7a2700219d68d5f428a46900d9291bd2, type: 3}
   pointBlood: 0
-  upperPointBlood: 8
+  upperPointBlood: 10
   lowerPointBlood: 5
   isBitten: 0
 --- !u!64 &1398817839
@@ -6065,7 +6106,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   point: {fileID: 7064418476306276579, guid: 7a2700219d68d5f428a46900d9291bd2, type: 3}
   pointBlood: 0
-  upperPointBlood: 8
+  upperPointBlood: 10
   lowerPointBlood: 5
   isBitten: 0
 --- !u!64 &1952434339

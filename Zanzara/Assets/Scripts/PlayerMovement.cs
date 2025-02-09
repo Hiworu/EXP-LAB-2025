@@ -13,7 +13,8 @@ public class PlayerMovement : MonoBehaviour
     private bool isAtTarget = false;
     private bool isCollectingBlood = false;
     private bool hasCollectedAllBlood = false;
-    [SerializeField] bool onSuckPoint = false;
+    private float collectionStartTime;
+    private bool onSuckPoint = false;
     [SerializeField] float mosquitoBlood = 0.0f;
     [SerializeField] float totalMosquitoBlood = 0;
     private float pointBlood = 0.0f;
@@ -21,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     private CameraMovement cameraMovement;
     private SuckPoint suckPoint;
     [SerializeField] LayerMask meatMask;
+    public AnimationCurve bloodCollectionCurve; // Curva di raccolta del sangue
     
 
     void Start()
@@ -167,10 +169,19 @@ public class PlayerMovement : MonoBehaviour
                 bloodToCollect *= 2; // Moltiplica pointBlood per 2 se onSuckPoint è true
             }
 
-            mosquitoBlood += bloodToCollect * (Time.deltaTime / bloodCollectionTime);
+            float elapsedTime = Time.time - collectionStartTime;
+            float curveValue = bloodCollectionCurve.Evaluate(elapsedTime / bloodCollectionTime);
+            float bloodIncrement = bloodToCollect * curveValue * Time.deltaTime;
+
+            mosquitoBlood += bloodIncrement;
+            totalMosquitoBlood += bloodIncrement;
+
             if (mosquitoBlood >= bloodToCollect)
             {
-                totalMosquitoBlood += pointBlood;
+                // Assicurati di non aggiungere più sangue del necessario
+                totalMosquitoBlood -= (mosquitoBlood - bloodToCollect);
+                mosquitoBlood = bloodToCollect;
+
                 if (suckPoint != null && onSuckPoint)
                 {
                     suckPoint.HasBeenBitten();
@@ -207,6 +218,6 @@ public class PlayerMovement : MonoBehaviour
     void AddBonusBlood()
     {
         totalMosquitoBlood += 10; // Aggiungi 10 a totalMosquitoBlood
-        hasCollectedAllBlood = false; // Resetta lo stato
+        //hasCollectedAllBlood = false; // Resetta lo stato
     }
 }

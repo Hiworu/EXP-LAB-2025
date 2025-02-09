@@ -9,7 +9,7 @@ public class SuckPoint : MonoBehaviour
     //il sangue ottenuto dai non punti non é piú sufficiente per mantenerti in vita
     public GameObject point;
     public int pointBlood;//script zanzara deve prendere questo
-    public int upperPointBlood = 8;
+    public int upperPointBlood = 10;
     public int lowerPointBlood = 5;
     public bool isBitten = false;
 
@@ -26,7 +26,7 @@ public class SuckPoint : MonoBehaviour
 
         if(isBitten == true)
         {
-            Debug.Log("Bitten");
+            //Debug.Log("Bitten");
             Destroy(point);
             StartCoroutine(RespawnPoint());
         }
@@ -34,6 +34,11 @@ public class SuckPoint : MonoBehaviour
         if(gameObject.CompareTag("UpperBody"))
         {
             pointBlood += upperPointBlood;
+        }
+
+        if(gameObject.CompareTag("LowerBody"))
+        {
+            pointBlood += lowerPointBlood;
         }
     }
 
