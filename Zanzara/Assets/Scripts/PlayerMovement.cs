@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     public float descendSpeed = 2.0f; // Velocità di discesa del player
     public float bloodCollectionTime = 10.0f; // Tempo per raccogliere il sangue
     public float bloodInExcess = 5.0f; // Sangue in eccesso
+    public static float maxMosquitoBlood = 200.0f; // Sangue massimo della zanzara
     private Rigidbody myBody;
     private Vector3 startPosition;
     private bool isDescending = false;
@@ -24,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 targetPosition;
     private CameraMovement cameraMovement;
     private SuckPoint suckPoint;
+    private GameManager gameManager;
     [SerializeField] LayerMask meatMask;
     public AnimationCurve bloodCollectionCurve; // Curva di raccolta del sangue
     
@@ -32,10 +34,7 @@ public class PlayerMovement : MonoBehaviour
     {
         myBody = GetComponent<Rigidbody>();
         cameraMovement = Camera.main.GetComponent<CameraMovement>();
-        if (cameraMovement == null)
-        {
-            Debug.LogError("CameraMovement script non trovato sulla Main Camera!");
-        }
+        gameManager = FindAnyObjectByType<GameManager>();
     }
 
     void Update()
@@ -146,7 +145,7 @@ public class PlayerMovement : MonoBehaviour
         {
             isDescending = false;
             isAtTarget = true;
-            isCollectingBlood = true; 
+            isCollectingBlood = true;
         }
     }
 
@@ -160,12 +159,14 @@ public class PlayerMovement : MonoBehaviour
             cameraMovement.pause = false; // Riattiva i movimenti della camera
             cameraMovement.BiteCam.SetActive(false);
         }
+        
     }
 
     void CollectBloodOnPoint()
     {
         if (suckPoint != null)
-        {
+        {   
+            gameManager.pause = true;
             float bloodToCollect = pointBlood;
             if (onSuckPoint)
             {
@@ -204,6 +205,7 @@ public class PlayerMovement : MonoBehaviour
         isCollectingBlood = false;
         mosquitoBlood = 0;
         onSuckPoint = false;
+        gameManager.pause = false;
     }
 
     void OnTriggerEnter(Collider other)
@@ -223,5 +225,6 @@ public class PlayerMovement : MonoBehaviour
     {
         totalMosquitoBlood += bloodInExcess;
     }
+
     
 }

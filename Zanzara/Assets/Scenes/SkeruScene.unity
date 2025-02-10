@@ -1601,10 +1601,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 700
   raycastDistance: 100
-  descendSpeed: 3
-  bloodCollectionTime: 50
+  descendSpeed: 5
+  bloodCollectionTime: 200
+  bloodInExcess: 30
   mosquitoBlood: 0
-  totalMosquitoBlood: 0
+  totalMosquitoBlood: 100
   meatMask:
     serializedVersion: 2
     m_Bits: 64
@@ -1614,15 +1615,15 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 2.0350075
-      outSlope: 2.0350075
+      inSlope: 2.9411192
+      outSlope: 2.9411192
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.20513178
-      value: 0.41744474
+      time: 0.24512506
+      value: 0.720942
       inSlope: 0.021074388
       outSlope: 0.021074388
       tangentMode: 0
@@ -1630,19 +1631,19 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.2855135
     - serializedVersion: 3
-      time: 0.72089106
-      value: 0.5075308
-      inSlope: 0.34195873
-      outSlope: 0.34195873
+      time: 0.89422494
+      value: 0.75258964
+      inSlope: 0.21568267
+      outSlope: 0.21568267
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.27685544
+      inWeight: 0.33706927
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 1.7644336
-      outSlope: 1.7644336
+      inSlope: 2.3390236
+      outSlope: 2.3390236
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -2437,6 +2438,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 812056293}
+  - component: {fileID: 812056294}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2459,6 +2461,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &812056294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 812056291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e1eca0c237631045b20c951c1c92ae8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TimerLivello: 200
+  pause: 0
+  decreaseRate: 1
+  decreaseRateStage1: 1
+  decreaseRateStage2: 2
+  decreaseRateStage3: 3
 --- !u!1 &867305853
 GameObject:
   m_ObjectHideFlags: 0
