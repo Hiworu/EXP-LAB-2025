@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -6,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     public float raycastDistance = 100.0f; // Distanza del raycast
     public float descendSpeed = 2.0f; // Velocità di discesa del player
     public float bloodCollectionTime = 10.0f; // Tempo per raccogliere il sangue
+    public float bloodInExcess = 5.0f; // Sangue in eccesso
     private Rigidbody myBody;
     private Vector3 startPosition;
     private bool isDescending = false;
@@ -15,8 +17,9 @@ public class PlayerMovement : MonoBehaviour
     private bool hasCollectedAllBlood = false;
     private float collectionStartTime;
     private bool onSuckPoint = false;
-    [SerializeField] float mosquitoBlood = 0.0f;
-    [SerializeField] float totalMosquitoBlood = 0;
+    private float bloodToCollect = 0.0f;
+    public float mosquitoBlood = 0.0f;
+    public float totalMosquitoBlood = 0;
     private float pointBlood = 0.0f;
     private Vector3 targetPosition;
     private CameraMovement cameraMovement;
@@ -172,22 +175,26 @@ public class PlayerMovement : MonoBehaviour
             float elapsedTime = Time.time - collectionStartTime;
             float curveValue = bloodCollectionCurve.Evaluate(elapsedTime / bloodCollectionTime);
             float bloodIncrement = bloodToCollect * curveValue * Time.deltaTime;
+            float greentime = 0.5f;
 
             mosquitoBlood += bloodIncrement;
             totalMosquitoBlood += bloodIncrement;
 
             if (mosquitoBlood >= bloodToCollect)
             {
-                // Assicurati di non aggiungere più sangue del necessario
-                totalMosquitoBlood -= (mosquitoBlood - bloodToCollect);
-                mosquitoBlood = bloodToCollect;
+                mosquitoBlood += bloodIncrement;
+
+                if (mosquitoBlood > bloodToCollect+ greentime)
+                {
+                    AddBonusBlood();
+                    SuckingOver();
+                }
 
                 if (suckPoint != null && onSuckPoint)
                 {
                     suckPoint.HasBeenBitten();
                 }
 
-                SuckingOver();
             }
         }
     }
@@ -210,14 +217,11 @@ public class PlayerMovement : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("Point"))
-        {
-            bloodCollectionTime = 10f;
-        }
+        SuckingOver();
     }
     void AddBonusBlood()
     {
-        totalMosquitoBlood += 10; // Aggiungi 10 a totalMosquitoBlood
-        //hasCollectedAllBlood = false; // Resetta lo stato
+        totalMosquitoBlood += bloodInExcess;
     }
+    
 }
