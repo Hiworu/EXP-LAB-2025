@@ -212,6 +212,7 @@ public class PlayerMovement : MonoBehaviour
         mosquitoBlood = 0;
         onSuckPoint = false;
         gameManager.pause = false;
+        suckingBar.SetSucking(0);
     }
 
     void OnTriggerEnter(Collider other)
