@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UIElements;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -28,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
     private GameManager gameManager;
     [SerializeField] LayerMask meatMask;
     public AnimationCurve bloodCollectionCurve; // Curva di raccolta del sangue
+    public SuckingBar suckingBar;
     
 
     void Start()
@@ -35,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
         myBody = GetComponent<Rigidbody>();
         cameraMovement = Camera.main.GetComponent<CameraMovement>();
         gameManager = FindAnyObjectByType<GameManager>();
+        suckingBar = FindAnyObjectByType<SuckingBar>();
     }
 
     void Update()
@@ -168,6 +171,8 @@ public class PlayerMovement : MonoBehaviour
         {   
             gameManager.pause = true;
             float bloodToCollect = pointBlood;
+            suckingBar.SetMaxSucking(bloodToCollect);
+            
             if (onSuckPoint)
             {
                 bloodToCollect *= 2; // Moltiplica pointBlood per 2 se onSuckPoint è true
@@ -179,6 +184,7 @@ public class PlayerMovement : MonoBehaviour
             float greentime = 0.5f;
 
             mosquitoBlood += bloodIncrement;
+            suckingBar.SetSucking(mosquitoBlood);
             totalMosquitoBlood += bloodIncrement;
 
             if (mosquitoBlood >= bloodToCollect)
