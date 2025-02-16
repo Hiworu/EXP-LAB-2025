@@ -1,4 +1,6 @@
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HumanBehaviour : MonoBehaviour
 {
@@ -9,6 +11,7 @@ public class HumanBehaviour : MonoBehaviour
     private GameObject cones;
     
     public bool isColliding = false;
+    public bool isGameOver = false; 
 
     private float nextRotationTime = 0f;
     private float rotationInterval = 2f; // Adjust the interval as needed
@@ -16,14 +19,14 @@ public class HumanBehaviour : MonoBehaviour
     private bool headUpDown = false;
     private float rotationSpeed = 2f; // Adjust the speed as needed
     private Quaternion targetRotation;
-    private float coneRotationSpeed = 30f; // Speed of the cone rotation
+    
 
 
      private void Start()
     {
         player = GameObject.Find("Player");
         cones = GameObject.Find("ViewCones");
-
+        head.transform.localRotation = Quaternion.Euler(0, -90, -90);
     }
 
     private void Update()
@@ -44,12 +47,12 @@ public class HumanBehaviour : MonoBehaviour
 
     private void RotateHeadRandomly()
     {
-        float randomYRotation = Random.Range(0f, 180); // 180 degrees range
-        float randomZRotation = Random.Range(-30f, 30); 
-        targetRotation = Quaternion.Euler(0, randomYRotation, 0);
+        float randomYRotation = Random.Range(-140f, -20f); // 180 degrees range
+        float randomZRotation = Random.Range(-120f, -60f); 
+        targetRotation = Quaternion.Euler(0, randomYRotation, -90);
         if(headUpDown == true)
         {
-            targetRotation = Quaternion.Euler(0, 0, randomZRotation);
+            targetRotation = Quaternion.Euler(0, randomYRotation, randomZRotation);
         }
     }
 
@@ -71,14 +74,15 @@ public class HumanBehaviour : MonoBehaviour
                     Debug.Log(gameObject.name);
                     cones.SetActive(true);
                     isRotating = true;
+                    headUpDown = true;
                     //head movement + periferal cone view 
                     break;
                 case "Awareness2":
                     Debug.Log(gameObject.name);
                     cones.SetActive(true);
                     headUpDown = true;
-                    //cones.transform.localScale = new Vector3(2, 2, 2);
                     isRotating = true;
+                    isGameOver = true;
                     //head movement + bigger view cone moves up and down + player death if inside
                     break;
             }
