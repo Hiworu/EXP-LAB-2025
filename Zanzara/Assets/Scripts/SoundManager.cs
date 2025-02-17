@@ -8,6 +8,7 @@ public class SoundManager : MonoBehaviour
     public static SoundManager instance;
     public AudioClip SuckingSound;
     public AudioSource audioSource;
+    private bool isSuckingSoundPlaying = false;
 
 
     private void Awake()
@@ -26,7 +27,19 @@ public class SoundManager : MonoBehaviour
 
     public void PlaySuckingSound()
     {
-        audioSource.PlayOneShot(SuckingSound);
+        if (!isSuckingSoundPlaying)
+        {
+            audioSource.PlayOneShot(SuckingSound);
+            isSuckingSoundPlaying = true;
+        }
+    }
+     public void StopSuckingSound()
+    {
+        if (isSuckingSoundPlaying)
+        {
+            audioSource.Stop();
+            isSuckingSoundPlaying = false;
+        }
     }
     
 }

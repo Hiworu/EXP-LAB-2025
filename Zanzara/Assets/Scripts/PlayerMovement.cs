@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UIElements;
+using UnityEngine.Experimental.GlobalIllumination;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -31,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
     public AnimationCurve bloodCollectionCurve; // Curva di raccolta del sangue
     public SuckingBar suckingBar;
     SoundManager SoundManager;
-    
+    public GameObject spotLight;
 
     void Start()
     {
@@ -40,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
         gameManager = FindAnyObjectByType<GameManager>();
         suckingBar = FindAnyObjectByType<SuckingBar>();
         SoundManager = FindAnyObjectByType<SoundManager>();
+
     }
 
     void Update()
@@ -88,6 +90,7 @@ public class PlayerMovement : MonoBehaviour
         if (isCollectingBlood)
         {
             CollectBloodOnPoint();
+            SoundManager.instance.PlaySuckingSound();
         }
     }
 
@@ -144,6 +147,8 @@ public class PlayerMovement : MonoBehaviour
     {
         cameraMovement.BiteCam.SetActive(true);
         cameraMovement.GraduallyChangeFOV(20);
+        spotLight.SetActive(false);
+
 
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, descendSpeed * Time.deltaTime);
         if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
@@ -163,6 +168,7 @@ public class PlayerMovement : MonoBehaviour
             isReturning = false;
             cameraMovement.pause = false; // Riattiva i movimenti della camera
             cameraMovement.BiteCam.SetActive(false);
+            spotLight.SetActive(true);
         }
         
     }
@@ -188,7 +194,6 @@ public class PlayerMovement : MonoBehaviour
             mosquitoBlood += bloodIncrement;
             suckingBar.SetSucking(mosquitoBlood);
             totalMosquitoBlood += bloodIncrement;
-            SoundManager.PlaySuckingSound();
 
             if (mosquitoBlood >= bloodToCollect)
             {
@@ -216,7 +221,7 @@ public class PlayerMovement : MonoBehaviour
         onSuckPoint = false;
         gameManager.pause = false;
         suckingBar.SetSucking(0);
-        SoundManager.audioSource.Stop();
+        SoundManager.instance.StopSuckingSound();
     }
 
     void OnTriggerEnter(Collider other)
