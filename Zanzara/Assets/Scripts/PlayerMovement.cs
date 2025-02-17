@@ -30,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] LayerMask meatMask;
     public AnimationCurve bloodCollectionCurve; // Curva di raccolta del sangue
     public SuckingBar suckingBar;
+    SoundManager SoundManager;
     
 
     void Start()
@@ -38,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
         cameraMovement = Camera.main.GetComponent<CameraMovement>();
         gameManager = FindAnyObjectByType<GameManager>();
         suckingBar = FindAnyObjectByType<SuckingBar>();
+        SoundManager = FindAnyObjectByType<SoundManager>();
     }
 
     void Update()
@@ -186,6 +188,7 @@ public class PlayerMovement : MonoBehaviour
             mosquitoBlood += bloodIncrement;
             suckingBar.SetSucking(mosquitoBlood);
             totalMosquitoBlood += bloodIncrement;
+            SoundManager.PlaySuckingSound();
 
             if (mosquitoBlood >= bloodToCollect)
             {
@@ -213,6 +216,7 @@ public class PlayerMovement : MonoBehaviour
         onSuckPoint = false;
         gameManager.pause = false;
         suckingBar.SetSucking(0);
+        SoundManager.audioSource.Stop();
     }
 
     void OnTriggerEnter(Collider other)
