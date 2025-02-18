@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
         {
             if (timerText != null)
             {
-                timerText.text = "Time: " + Mathf.Ceil(TimerLivello).ToString();
+                timerText.text = "Timer: " + Mathf.Ceil(TimerLivello).ToString();
             }
         }
     }

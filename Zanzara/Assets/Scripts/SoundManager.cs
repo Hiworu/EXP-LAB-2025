@@ -7,6 +7,8 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager instance;
     public AudioClip SuckingSound;
+    public AudioClip FailSound;
+    public AudioClip ReleaseSound;
     public AudioSource audioSource;
     private bool isSuckingSoundPlaying = false;
 
@@ -33,6 +35,17 @@ public class SoundManager : MonoBehaviour
             isSuckingSoundPlaying = true;
         }
     }
+
+    public void playfailsound()
+    {
+        audioSource.PlayOneShot(FailSound);
+    }
+
+    public void playreleasesound()
+    {
+        audioSource.PlayOneShot(ReleaseSound);
+    }
+    
      public void StopSuckingSound()
     {
         if (isSuckingSoundPlaying)

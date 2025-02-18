@@ -218,6 +218,7 @@ public class PlayerMovement : MonoBehaviour
 
     void SuckingOver() //quando finisco di prendere sangue o tolgo io in anticipo input
     {
+        SoundManager.instance.playreleasesound();
         isCollectingBlood = false;
         mosquitoBlood = 0;
         onSuckPoint = false;
@@ -242,6 +243,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void AddBonusBlood()
     {
+        SoundManager.instance.playfailsound();
         totalMosquitoBlood += bloodInExcess;
         suckingBar.bloodexplosion.SetActive(true);
     }
