@@ -221,6 +221,7 @@ public class PlayerMovement : MonoBehaviour
         onSuckPoint = false;
         gameManager.pause = false;
         suckingBar.SetSucking(0);
+        suckingBar.cornice.SetActive(false);
         SoundManager.instance.StopSuckingSound();
     }
 
