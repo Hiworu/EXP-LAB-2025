@@ -78,11 +78,11 @@ public class HumanBehaviour : MonoBehaviour
                     //head movement + periferal cone view 
                     break;
                 case "Awareness2":
-                    Debug.Log(gameObject.name);
                     cones.SetActive(true);
                     headUpDown = true;
                     isRotating = true;
                     isGameOver = true;
+                    Debug.Log(isGameOver);
                     //head movement + bigger view cone moves up and down + player death if inside
                     break;
             }
