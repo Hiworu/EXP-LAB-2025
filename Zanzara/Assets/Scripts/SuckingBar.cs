@@ -6,6 +6,7 @@ public class SuckingBar : MonoBehaviour
 {
     public Slider suckingBar;
     public GameObject cornice;
+    public GameObject bloodexplosion;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     public void SetMaxSucking(float sucking)
@@ -18,6 +19,5 @@ public class SuckingBar : MonoBehaviour
     {
         suckingBar.value = sucking;
         cornice.SetActive(true);
-        
     }
 }

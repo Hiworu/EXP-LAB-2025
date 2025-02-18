@@ -33,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
     public SuckingBar suckingBar;
     SoundManager SoundManager;
     public GameObject spotLight;
+    public GameObject mosquitoButt;
 
     void Start()
     {
@@ -201,8 +202,8 @@ public class PlayerMovement : MonoBehaviour
 
                 if (mosquitoBlood > bloodToCollect+ greentime)
                 {
-                    AddBonusBlood();
                     SuckingOver();
+                    AddBonusBlood();
                 }
 
                 if (suckPoint != null && onSuckPoint)
@@ -222,7 +223,7 @@ public class PlayerMovement : MonoBehaviour
         gameManager.pause = false;
         suckingBar.SetSucking(0);
         suckingBar.cornice.SetActive(false);
-        SoundManager.instance.StopSuckingSound();
+        StartCoroutine(DisableBloodExplosion());
     }
 
     void OnTriggerEnter(Collider other)
@@ -241,7 +242,14 @@ public class PlayerMovement : MonoBehaviour
     void AddBonusBlood()
     {
         totalMosquitoBlood += bloodInExcess;
+        suckingBar.bloodexplosion.SetActive(true);
+    }
+    IEnumerator DisableBloodExplosion()
+    {
+        yield return new WaitForSeconds(1);
+        suckingBar.bloodexplosion.SetActive(false);
+        SoundManager.instance.StopSuckingSound();
     }
 
-    
+
 }

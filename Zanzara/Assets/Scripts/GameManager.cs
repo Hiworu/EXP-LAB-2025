@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,6 +15,7 @@ public class GameManager : MonoBehaviour
 
     private PlayerMovement playerMovement;
     private float initialTimerLivello;
+    private float previousTotalMosquitoBlood;
 
     void Start()
     {
@@ -25,6 +28,8 @@ public class GameManager : MonoBehaviour
 
         // Salva il valore iniziale di TimerLivello
         initialTimerLivello = TimerLivello;
+        // Inizializza previousTotalMosquitoBlood
+        previousTotalMosquitoBlood = playerMovement.totalMosquitoBlood;
     }
 
     void Update()
@@ -58,8 +63,14 @@ public class GameManager : MonoBehaviour
         if (!pause && playerMovement != null)
         {
             playerMovement.totalMosquitoBlood -= decreaseRate * Time.deltaTime;
-            if (playerMovement.totalMosquitoBlood <= 0)
-            {
+            float Scale = playerMovement.totalMosquitoBlood / 2;
+            // Aggiorna la scala di mosquitoButt
+            playerMovement.mosquitoButt.transform.localScale = new Vector3(Scale, Scale, Scale);
+            // Aggiorna previousTotalMosquitoBlood
+            previousTotalMosquitoBlood = playerMovement.totalMosquitoBlood;
+
+            if (playerMovement.totalMosquitoBlood <= 20)
+            {   
                 SceneManager.LoadScene("GameOver");
             }
             if (playerMovement.totalMosquitoBlood >= PlayerMovement.maxMosquitoBlood)
