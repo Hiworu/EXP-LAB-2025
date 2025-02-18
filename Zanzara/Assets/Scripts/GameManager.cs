@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,10 +17,13 @@ public class GameManager : MonoBehaviour
     private PlayerMovement playerMovement;
     private float initialTimerLivello;
     private float previousTotalMosquitoBlood;
+    SoundManager SoundManager;
+    public TextMeshProUGUI timerText; // Aggiungi questa variabile
 
     void Start()
     {
         // Trova il componente PlayerMovement
+        SoundManager = FindAnyObjectByType<SoundManager>();
         playerMovement = FindAnyObjectByType<PlayerMovement>();
         if (playerMovement == null)
         {
@@ -41,8 +45,12 @@ public class GameManager : MonoBehaviour
         }
         if (TimerLivello <= 0)
         {
+            SoundManager.audioSource.Stop();
             SceneManager.LoadScene("WinScreen");
         }
+
+        // Aggiorna il testo del timer
+        UpdateTimerText();
 
         // Cambia il decreaseRate in base al TimerLivello
         float thirdOfTimer = initialTimerLivello / 3.0f;
@@ -71,11 +79,21 @@ public class GameManager : MonoBehaviour
 
             if (playerMovement.totalMosquitoBlood <= 20)
             {   
+                SoundManager.audioSource.Stop();
                 SceneManager.LoadScene("GameOver");
             }
             if (playerMovement.totalMosquitoBlood >= PlayerMovement.maxMosquitoBlood)
-            {
+            {   
+                SoundManager.audioSource.Stop();
                 SceneManager.LoadScene("GameOver");
+            }
+        }
+        
+        void UpdateTimerText()
+        {
+            if (timerText != null)
+            {
+                timerText.text = "Time: " + Mathf.Ceil(TimerLivello).ToString();
             }
         }
     }

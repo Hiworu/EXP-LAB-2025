@@ -34,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
     SoundManager SoundManager;
     public GameObject spotLight;
     public GameObject mosquitoButt;
+    private float hitPointThreshold = 1.0f; // Threshold per l'hit point
 
     void Start()
     {
@@ -127,7 +128,7 @@ public class PlayerMovement : MonoBehaviour
                 Debug.Log("hit point");
                 isDescending = true;
                 isReturning = false;
-                targetPosition = hit.point;
+                targetPosition = hit.point + hit.normal * hitPointThreshold;
                 myBody.linearVelocity = Vector3.zero; // Ferma il movimento corrente
                 cameraMovement.pause = true; // Metti in pausa la camera
                 suckPoint = hit.collider.GetComponent<SuckPoint>();
@@ -246,9 +247,9 @@ public class PlayerMovement : MonoBehaviour
     }
     IEnumerator DisableBloodExplosion()
     {
+        SoundManager.instance.StopSuckingSound();
         yield return new WaitForSeconds(1);
         suckingBar.bloodexplosion.SetActive(false);
-        SoundManager.instance.StopSuckingSound();
     }
 
 
