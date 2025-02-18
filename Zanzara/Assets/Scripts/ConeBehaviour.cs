@@ -9,7 +9,7 @@ public class ConeBehaviour : MonoBehaviour
    private void Start()
    {
        player = GameObject.Find("Player");
-       behav = player.GetComponent<HumanBehaviour>();
+       behav = GetComponent<HumanBehaviour>();
    }
 
    private void OnTriggerEnter(Collider other)
