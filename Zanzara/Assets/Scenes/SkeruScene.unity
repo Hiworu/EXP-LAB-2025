@@ -2889,7 +2889,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SuckingSound: {fileID: 8300000, guid: 41394e8408f0dbd41bb48d7453a6f95b, type: 3}
   FailSound: {fileID: 8300000, guid: bfa5046dcc7d50746b0053661da6aef4, type: 3}
-  ReleaseSound: {fileID: 0}
+  ReleaseSound: {fileID: 8300000, guid: bb8fa00f37dab384eab521f4ba75059a, type: 3}
   audioSource: {fileID: 812056297}
 --- !u!82 &812056297
 AudioSource:

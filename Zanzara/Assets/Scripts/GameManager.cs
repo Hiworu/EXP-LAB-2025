@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
         if (TimerLivello <= 0)
         {
             SoundManager.audioSource.Stop();
-            SceneManager.LoadScene("WinScreen");
+            SceneManager.LoadScene("GameWin");
         }
 
         // Aggiorna il testo del timer

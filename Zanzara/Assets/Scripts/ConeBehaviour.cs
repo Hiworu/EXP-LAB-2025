@@ -9,9 +9,9 @@ public class ConeBehaviour : MonoBehaviour
 
    private void Start()
    {
-        SoundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
-       player = GameObject.Find("Player");
-       behav = GetComponent<HumanBehaviour>();
+        SoundManager = /*GameObject.Find("SoundManager").*/GetComponent<SoundManager>();
+        player = GameObject.Find("Player");
+        behav = GetComponent<HumanBehaviour>();
    }
 
    private void OnTriggerEnter(Collider other)
@@ -19,7 +19,7 @@ public class ConeBehaviour : MonoBehaviour
        if (other.gameObject == player && behav.isGameOver == true)
        {
             SoundManager.audioSource.Stop();
-           SceneManager.LoadScene("GameOver");  
+            SceneManager.LoadScene("GameOver");  
        }
    }
 }
